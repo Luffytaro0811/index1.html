@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hearts & Homes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fredoka', sans-serif;
+      background: #fff8f0;
+      scroll-behavior: smooth;
+    }
+    nav {
+      background-color: #ffebf2;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #e91e63;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #e91e63;
+    }
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    form button, button {
+      padding: 10px 20px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 10px;
+      color: #ff5722;
+    }
+    footer {
+      background-color: #4a148c;
+      color: white;
+      text-align: center;
+      padding: 30px;
+      margin-top: 50px;
+    }
+    .gallery img {
+      width: 30%;
+      margin: 5px;
+      border-radius: 8px;
+    }
+    .hero {
+      height: 100vh;
+      background: url('orphan-kids.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    }
+    .hero p {
+      font-size: 1.5rem;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .hero a {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #e91e63;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+    .hero a:hover {
+      background-color: #c2185b;
+    }
+    .hygiene-checklist li {
+      list-style: none;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+    .hygiene-checklist input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    .game-container {
+      background-color: #e3f2fd;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 20px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    canvas {
+      background: #bbdefb;
+      border-radius: 10px;
+      display: block;
+      margin: 10px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Hearts & Homes</h1>
+    <p>Empowering orphanages through love, care, and community</p>
+    <a href="#about">Explore More</a>
+  </div>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#fundraiser">Fundraiser</a>
+    <a href="#hygiene">Health & Hygiene</a>
+    <a href="#education">Education & Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Hearts & Homes is a heartfelt initiative connecting generous donors to orphanages in need. Through love, education, and shared joy, we aim to build a brighter future for every child.</p>
+    <div class="gallery">
+      <img src="https://cdn.pixabay.com/photo/2017/01/18/15/37/children-1991058_960_720.jpg">
+      <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/child-1474565_960_720.jpg">
+      <img src="https://cdn.pixabay.com/photo/2017/06/13/22/42/kids-2408614_960_720.jpg">
+    </div>
+  </section>
+
+  <section id="fundraiser">
+    <h2>Fundraiser</h2>
+    <form>
+      <input type="text" placeholder="Your First Name" required />
+      <input type="text" placeholder="Your Last Name" required />
+      <input type="email" placeholder="Email Address" required />
+      <input type="tel" placeholder="Phone Number" required />
+      <textarea placeholder="Items to donate (books, clothes, etc.)"></textarea>
+      <input type="file" />
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <section id="hygiene">
+    <h2>Health & Hygiene</h2>
+    <ul class="hygiene-checklist">
+      <li><input type="checkbox"> Brushed teeth 🪥</li>
+      <li><input type="checkbox"> Washed hands 👐</li>
+      <li><input type="checkbox"> Wore clean clothes 👕</li>
+      <li><input type="checkbox"> Trimmed nails ✂️</li>
+      <li><input type="checkbox"> Drank clean water 💧</li>
+    </ul>
+    <button onclick="checkHygiene()">Check Hygiene</button>
+    <div id="result" class="result"></div>
+
+    <h3>🧠 Hygiene Quiz</h3>
+    <p>How many seconds should you wash your hands?</p>
+    <button onclick="checkQuiz(10)">10</button>
+    <button onclick="checkQuiz(20)">20</button>
+    <button onclick="checkQuiz(30)">30</button>
+    <div id="quiz-result" class="result"></div>
+
+    <h3>✍️ Take the Pledge</h3>
+    <input type="text" id="name" placeholder="Your Name">
+    <button onclick="submitPledge()">Submit</button>
+    <div id="pledge-result" class="result"></div>
+
+    <h3>🎮 Let's Play a Game!</h3>
+    <p>Collect as many healthy foods as you can in 30 seconds!</p>
+    <div class="game-container">
+      <button onclick="startGame()">Start Game</button>
+      <canvas id="gameCanvas" width="400" height="300"></canvas>
+      <div id="score-board" class="result"></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education & Skills</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="text" placeholder="Books or materials to donate" />
+      <select>
+        <option>Art Workshop</option>
+        <option>Music/Dance</option>
+        <option>Games & Sports</option>
+        <option>English Tutoring</option>
+      </select>
+      <textarea placeholder="Describe your idea or suggest a date"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>📧 Email: support@heartsandhomes.org</p>
+    <p>📞 Phone: +91 98765 43210</p>
+    <p>📍 Address: 123 Hope Street, New Delhi, India</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Hearts & Homes | Built with ❤️ for every child</p>
+  </footer>
+
+  <script>
+    function checkHygiene() {
+      const checkboxes = document.querySelectorAll('.hygiene-checklist input[type="checkbox"]');
+      let checkedCount = 0;
+      checkboxes.forEach(cb => { if (cb.checked) checkedCount++; });
+      document.getElementById("result").textContent = checkedCount >= 4 ? "You're a Hygiene Hero! 🌟" : "Keep trying! 💪";
+    }
+
+    function checkQuiz(val) {
+      document.getElementById("quiz-result").textContent = val === 20 ? "Correct! ✅" : "Oops! It's 20 seconds.";
+    }
+
+    function submitPledge() {
+      const name = document.getElementById("name")?.value || "";
+      document.getElementById("pledge-result").textContent = name ? `Thank you, ${name}! You're a Hygiene Ambassador 🧼✨` : "Please enter your name!";
+    }
+
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    let basketX = canvas.width / 2;
+    const basketWidth = 80;
+    const basketHeight = 10;
+    let foodX = Math.random() * canvas.width;
+    let foodY = 0;
+    const foodRadius = 15;
+    let score = 0;
+    let highestScore = 0;
+    let foodEmojis = ["🍎", "🥦", "🍌", "🥕", "🍇"];
+    let foodEmoji = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+    let gameRunning = false;
+    let startTime;
+
+    function drawBasket() {
+      ctx.fillStyle = "#4CAF50";
+      ctx.fillRect(basketX, canvas.height - basketHeight, basketWidth, basketHeight);
+    }
+
+    function drawFood() {
+      ctx.font = "24px Arial";
+      ctx.fillText(foodEmoji, foodX, foodY);
+    }
+
+    function drawScore() {
+      ctx.font = "16px Fredoka";
+      ctx.fillStyle = "#333";
+      ctx.fillText("Score: " + score, 10, 20);
+      ctx.fillText("High Score: " + highestScore, 10, 40);
+    }
+
+    function updateGame() {
+      if (!gameRunning) return;
+      const currentTime = Date.now();
+      if (currentTime - startTime >= 30000) {
+        gameRunning = false;
+        document.getElementById("score-board").innerText = `Game Over! Final Score: ${score}`;
+        return;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawBasket();
+      drawFood();
+      drawScore();
+      foodY += 2;
+
+      if (
+        foodY + foodRadius > canvas.height - basketHeight &&
+        foodX > basketX &&
+        foodX < basketX + basketWidth
+      ) {
+        score++;
+        highestScore = Math.max(highestScore, score);
+        foodX = Math.random() * (canvas.width - 20);
+        foodY = 0;
+        foodEmoji = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+      }
+
+      if (foodY > canvas.height) {
+        foodX = Math.random() * (canvas.width - 20);
+        foodY = 0;
+        foodEmoji = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+      }
+      requestAnimationFrame(updateGame);
+    }
+
+    document.addEventListener("mousemove", function(e) {
+      const rect = canvas.getBoundingClientRect();
+      basketX = e.clientX - rect.left - basketWidth / 2;
+    });
+
+    function startGame() {
+      score = 0;
+      foodY = 0;
+      foodEmoji = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+      gameRunning = true;
+      startTime = Date.now();
+      updateGame();
+    }
+  </script>
+</body>
+</html>
